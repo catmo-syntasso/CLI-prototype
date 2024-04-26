@@ -52,7 +52,7 @@ program.command('template')
 program.command('validate')
   .description('Validate whether a promise or resource request is in the correct format')
   .argument('<promisefilepath>','Path to the file you want to validate (relative to current location)')
-  //.option('-r, --request <resourcefilepath>', 'path to yaml that should request a resource of the promise type')
+  .option('-r, --request <resourcefilepath>', 'path to yaml that should request a resource of the promise type')
   .action((promisefilepath, options) => {
     console.log('Validating promise ' + '%s\n'.blue, promisefilepath);
     if (promisefilepath === 'cat-promise.yaml') {
@@ -71,38 +71,27 @@ program.command('validate')
       }, 1000);
       return;
     }
-    if (options.request) {
-      console.log('Checking that the request in %s will work for promise', options.request + 'cat'.blue)
-      if (options.request==='resource-request.yaml'){
-        spinner.start()
-        setTimeout(function() {
-          spinner.stop();
-          console.log('\n\n' + 'Great!'.green);
-          console.log('%s '.blue, options.request +'will request a resource for ' + '%s'.blue, promisefilepath)
-        }, 1000);
-      } else {
-        spinner.start()
-        setTimeout(function() {
-          spinner.stop();
-          console.log('\n\n' + 'Uh oh, that won\'t work!'.red);
-          console.log('%s '.blue, options.request +'will not request a resource for ' + '%s'.blue, promisefilepath)
-        }, 1000);
-      }
-    } 
+    // if (options.request) {
+    //   console.log('Checking that the request in %s will work for promise', options.request + 'cat'.blue)
+    //   if (options.request==='resource-request.yaml'){
+    //     spinner.start()
+    //     setTimeout(function() {
+    //       spinner.stop();
+    //       console.log('\n\n' + 'Great!'.green);
+    //       console.log('%s '.blue, options.request +'will request a resource for ' + '%s'.blue, promisefilepath)
+    //     }, 1000);
+    //   } else {
+    //     spinner.start()
+    //     setTimeout(function() {
+    //       spinner.stop();
+    //       console.log('\n\n' + 'Uh oh, that won\'t work!'.red);
+    //       console.log('%s '.blue, options.request +'will not request a resource for ' + '%s'.blue, promisefilepath)
+    //     }, 1000);
+    //   }
+    // } 
     
 
   });
 
-
 program.parse();
 
-
-// program.command('split')
-//   .description('Split a string into substrings and display as an array')
-//   .argument('<string>', 'string to split')
-//   .option('--first', 'display just the first substring')
-//   .option('-s, --separator <char>', 'separator character', ',')
-//   .action((str, options) => {
-//     const limit = options.first ? 1 : undefined;
-//     console.log(str.split(options.separator, limit));
-//   });
